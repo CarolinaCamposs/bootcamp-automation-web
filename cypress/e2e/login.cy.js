@@ -2,17 +2,16 @@
 
 //funcionalidade
 describe('Login', () => {
-
-    //roda todos os cenários de forma responsiva
-    // beforeEach(() => {
-    //     cy.viewport('');
-    // });
+    const url = 'https://automationpratice.com.br/login'
+    
+    beforeEach(() => {
+       // cy.viewport(''); //roda todos os cenários de forma responsiva
+       cy.visit(url);
+    });
 
     //cenarios
     it('Login com sucesso', () => {
     // DADO 
-    // abrir a aplicação
-    cy.visit('https://automationpratice.com.br/login');
     // preenche email e senha
     cy.get('#user').type('edu@qazando.com');
     cy.get('#password').type('123456');
@@ -30,7 +29,6 @@ describe('Login', () => {
  });
 
     it('E-mail inválido', () => {
-        cy.visit('https://automationpratice.com.br/login');
         cy.get('#user').type('qualquercoisa');
         cy.get('#password').type('123456');
         cy.get('#btnLogin').click();
@@ -38,7 +36,6 @@ describe('Login', () => {
     });
 
      it('Senha invalida', () => {
-        cy.visit('https://automationpratice.com.br/login');
         cy.get('#user').type('carol@bootcamp.com');
         cy.get('#password').type('abc');
         cy.get('#btnLogin').click();
@@ -46,21 +43,18 @@ describe('Login', () => {
     });
 
     it('E-mail vazio', () => {
-        cy.visit('https://automationpratice.com.br/login');
         cy.get('#password').type('abc');
         cy.get('#btnLogin').click();
         cy.get('.invalid_input').should('have.text', 'E-mail inválido.');
     });
 
     it('Senha Vazia', () => {
-        cy.visit('https://automationpratice.com.br/login');
         cy.get('#user').type('carol@bootcamp.com');
         cy.get('#btnLogin').click();
         cy.get('.invalid_input').should('have.text', 'Senha inválida.');
     });
 
     it('E-mail e senha vazios', () => {
-        cy.visit('https://automationpratice.com.br/login');
         cy.get('#btnLogin').click();
         cy.get('.invalid_input').should('have.text', 'E-mail inválido.');
     });
